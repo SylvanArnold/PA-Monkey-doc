@@ -1,25 +1,15 @@
 #import "template/template.typ": appendix, report-template
 
 #show: report-template.with(
-  title: "Automated Testbench for Communicative Embedded Systems",
+  title: "Automated Testbench for a Communicative Embedded System",
   author: "Sylvan Arnold",
   orientation: "Computer Science",
-  teacher: "",
+  subtitle: "PA Project",
+  teacher: "Métrailler Christofer",
   confidential: false,
 )
 
-= Introduction
-Reference @reference
-
-#figure(
-  raw(
-    "Console.log('Hello, world!');
-",
-    lang: "js",
-    block: true,
-  ),
-  caption: "JavaScript example",
-)
+#include "01-introduction.typ"
 
 
 #pagebreak()
@@ -27,6 +17,3 @@ Reference @reference
 #pagebreak()
 
 #show: appendix
-
-= Proofs
-#lorem(100)
