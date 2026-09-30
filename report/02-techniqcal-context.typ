@@ -11,6 +11,7 @@ A smartphone application has been developed to connect/configure the collar.
 == Features
 
 - Bluetooth connectivity
-- Power consumption
 - Microphone
+- SD card storage
+- Battery powered
 
