@@ -14,7 +14,6 @@
   body,
   state: "To be finalized",
   accent-color: rgb(40, 94, 151),
-  acknowledgments: [#lorem(50)],
   lang: "en",
   font: "Arial",
   body-font: "Libertinus Serif",
@@ -51,7 +50,6 @@
   let t = (
     en: (
       toc: "Table of Contents",
-      ack: "Acknowledgments",
       declaration: "Declaration of honor",
       declaration_content: "I hereby affirm that this assignment is my own written work and that I have used no other sources or aids other than those indicated. All passages that have been quoted from publications or paraphrased from these sources are indicated as such. Additionally, any assistance from artificial intelligence tools has been appropriately acknowledged and documented.",
       produced_by: "Author",
@@ -66,7 +64,6 @@
     ),
     fr: (
       toc: "Table des matières",
-      ack: "Remerciements",
       declaration: "Déclaration d’honneur",
       declaration_content: "Je certifie par la présente que ce travail est le fruit de mon propre travail écrit et que je n’ai utilisé aucune autre source ou aide que celles indiquées. Tous les passages qui ont été cités à partir de publications ou paraphrasés à partir de ces sources sont indiqués comme tels. De plus, toute aide provenant d’outils d’intelligence artificielle a été correctement mentionnée et documentée.",
       produced_by: "Réalisé par",
@@ -85,7 +82,7 @@
 
   // TYPOGRAPHY
   set document(title: title, author: author, date: date)
-  set text(font: body-font, size: 14pt, fill: ink, lang: lang)
+  set text(font: body-font, size: 12pt, fill: ink, lang: lang)
   set par(justify: true, leading: 0.72em, spacing: 1.15em)
 
   show link: set text(fill: accent-color)
@@ -291,10 +288,6 @@
         ]
       ]
     ]
-
-    #pagebreak()
-    = #tr("ack")
-    #acknowledgments
   ]
 
   pagebreak()
