@@ -2,67 +2,53 @@
 
 = Technical Context <section:technical-context>
 
-== Hardware in the loop principle
+== Hardware-in-the-loop principle
 
-Hardware-in-the-loop (HIL) is a technique used in the development and testing of embedded systems.
+Hardware-in-the-loop (HIL) is a technique used in the development and testing of embedded systems. The device under test (DUT) is installed in a deterministic, controllable environment, where a simulator reproduces real-world conditions by emulating sensors, actuators and communication. The simulator runs multiple scenarios and measures the DUT's behaviour.
 
-The device under test (DUT) is installed in a deterministic, controllable environment. A simulator reproduces real-world conditions by emulating sensors, actuators, and communication. It runs multiple scenarios and measures the DUT’s behavior.
+Unlike software-only simulation, HIL testing includes the real hardware and therefore allows engineers to validate the interaction between the embedded software and its physical interfaces.
 
-Unlike software-only simulation, HIL testing includes the real hardware and allows engineers to validate the interaction between the embedded software and its physical interfaces.
+== The smart collar
 
-== Collar Description
+The collar is a battery-powered Bluetooth device worn around the monkey's neck. It records the animal's vocalisations in the field and can be released remotely at the end of the experiment, without having to sedate the animal again.
 
-The battery powered Bluetooth collar is installed on the neck of the monkey. A microphone records the animal sounds and stores them on an SD card. A remote controlled release mechanism allows user to trigger the collar drop at the end of the experiment. 
+=== First version
 
-The remote control is done on a smartphone application that connects to the collar via bluetooth
+The deployed version is equipped with a microphone that records the animal's vocalisations, which are stored on an SD card for later analysis. A remotely controlled release mechanism allows the user to trigger the collar's release at the end of the experiment; it is controlled through a smartphone application that communicates with the collar via Bluetooth. This version has a battery life of around 12 days.
 
-*features:*
+=== Second version
 
-- Bluetooth connectivity
-- Microphone
-- SD card storage
-- Remote release mechanism
-- Battery powered
+The second version, currently under development, keeps the same purpose but extends the design with the hardware upgrades listed in @collar-v2.
 
-The first version had a battery life around 12 days.
+#figure(
+table(
+  columns: (1.3fr, 2fr),
+  align: (left, left),
+  [*Upgrade*], [*Purpose*],
+  [Wired USB data interface], [File retrieval and firmware updates],
+  [TDK T5848 MEMS smart microphone], [Triggers recording only during sound events, reducing power consumption and storage needs],
+  [Nordic nRF54L15 microcontroller], [More advanced Bluetooth microcontroller, pin-compatible with a neural processing unit for future species classification],
+  [Dedicated power management circuit], [Battery health monitoring and data protection on power loss],
+), caption: [Hardware upgrades of the second collar version]
+)<collar-v2>
 
-The v2, currently under development extends the design with these hardware upgrades: 
+Together, these upgrades bring robustness against data loss and an extended battery life, which allows more data to be collected. Developers also plan to add a new mechanism, proximity detection between collars, which will allow scientists to study group interactions more deeply.
 
-- A wired usb data interface for file retrieval and firmware updates
-- A TDK T5848 MEMS smart microphone that triggers recording only during sound events, reducing power consumption and storage needs
-- Upgraded version of bluetooth microcontroller, a Nordic nRF54L15
-- A dedicated power management circuit for battery health monitoring and data protection on power loss
-- A pin-compatible microcontroller upgrade path to a neural processing unit for future species classification
+The testbench must therefore be able to integrate tests for the second version features.
 
-It allows these additional features:
+== Mechanisms to test
 
-- robustness over data loss
-- extended battery life, which allow to collect more data
-- proximity detection between monkeys to study interractions more deeply
-
-== Motivation
-
-=== During development
-
-When introducing new features or modifying existing functionality, it is important to ensure that they work as expected and do not introduce bugs into the system. The validation process must ensure that all existing features continue to function properly.
-
-For example, we must ensure that firmware modifications do not increase power consumption, which is critical for the collar.
-
-Performing this manually every time is time-consuming and error-prone. That is why we need a deterministic CI pipeline that runs these tests automatically.
-
-An automated testbench can also collect a wide range of useful metrics and generate a performance report. The HES-SO developing team is especially interested in an automated power-profiling test that records the system's power consumption in different scenarios, such as Bluetooth advertising and sound recording. This will allow them to optimize both the firmware and the hardware.
-
-
-=== During production
-
-In production, the design is assumed to be good. But we still have to ensure that the produced unit is functioning properly.
-
-Production testing allows to quickly detect:
-
-- faulty components
-- miscalibrated sensors
-- short circuits and bad solder joints
-
-Sending defect devices to the market can ruin a company reputation. In our case, installing a collar on a monkey is a complex operation, as you have to sedate the animal to reach it. And in the worst case, if the detach mechanism cannot be triggered or doesn't engage properly, you have to resedate the animal to remove it. This is why we want to detect the defects before deployment.
-
-Automating these tests reduces the time and avoids human error.
+@mechanisms lists the collar mechanisms that have to be validated:
+#figure(
+table(
+  columns: (1fr, 2fr),
+  align: (left, left),
+  [*Mechanism*], [*What must be validated*],
+  [Bluetooth connectivity], [Advertising, connection, GATT service compliance],
+  [Microphone], [Record sounds only when above a defined threshold],
+  [Data storage], [Recorded data is correctly written and can be retrieved],
+  [Power loss], [Data must not be corrupted in case of battery failure],
+  [Power consumption], [Consumption must not go above a defined threshold],
+  [Remote release mechanism], [Can be triggered via bluetooth],
+), caption: [Mechanisms to test and their validation criteria]
+)<mechanisms>
