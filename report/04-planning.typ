@@ -3,7 +3,7 @@
 #import "@preview/mmdr:0.2.2": mermaid
 = Planning <section:planning>
 
-== Workpackages
+== Methodology
 
 The tasks have beed divided into workpackages:
 

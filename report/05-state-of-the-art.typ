@@ -2,11 +2,20 @@
 
 = State of the art <section:state-of-the-art>
 
-== State of the art in CI/CD
+== Examples in the industry
 
-=== Smartphone Farms
+*Smarphones farms* : Some companies maintain large farms of smartphones to run automated tests on different devices and OS versions. This allows them to ensure application compatibility and performance across a wide range of hardware. The most advanced farms even use robotic arms to physically interact with the devices, simulating user input and testing various scenarios.
 
-Most of the HIL industry uses smartphone farms to test the behavior of applications on a wide range of devices. There are several companies that have built large-scale smartphone testing infrastructures.
+*Automotive industry* : In the automotive sector, hardware in the loop testing is crucial for validating the performance and safety of embedded systems in vehicles. Companies use HIL setups to test electronic control units (ECUs), onboard computers, and other components under various conditions, such as different temperatures, voltages, and sensor inputs.
+
+*Aerospace* : 
+
+*IoT devices*: 
+
+
+
+== Hardware in the loop in CI/CD pipelines
+
 
 === Constraints
 
@@ -18,7 +27,6 @@ Hardware in the loop in a CI pipeline adds a layer of complexity to the testing 
     - non deterministic behavior
     - limited parallelization
 
-  
 That's why modern development teams use an hybrid approach whith multiple testing layers.
 
 *Layer 1*: static analysis
@@ -37,6 +45,6 @@ Finally, hardware in the loop tests are performed on actual devices to validate 
 
 === Parallelization
 
+how parallelization is performed, technologies used, examples in the IOT industry
 
-
-== State of the art in production line testing
+== Automated tests on production lines

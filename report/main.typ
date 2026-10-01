@@ -16,7 +16,7 @@ Métrailler Christopher",
 #include "04-planning.typ"
 #include "05-state-of-the-art.typ"
 #include "06-pytest-vs-robot-framework.typ"
-#include "07-architecture-overwiew.typ"
+#include "07-architecture-design.typ"
 #include "08-test-strategy.typ"
 #include "09-implementation.typ"
 #include "10-results.typ"

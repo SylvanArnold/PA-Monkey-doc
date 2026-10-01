@@ -15,7 +15,7 @@
   state: "To be finalized",
   accent-color: rgb(40, 94, 151),
   lang: "en",
-  font: "Arial",
+  font: "Libertinus Serif",
   body-font: "Libertinus Serif",
   mono-font: "DejaVu Sans Mono",
 ) = {
